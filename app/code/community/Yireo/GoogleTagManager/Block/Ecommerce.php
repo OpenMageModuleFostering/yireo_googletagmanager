@@ -9,8 +9,8 @@
  */
 
 /**
- * Class Yireo_GoogleTagManager_Block_Customer
+ * Class Yireo_GoogleTagManager_Block_Ecommerce
  */
-class Yireo_GoogleTagManager_Block_Customer extends Yireo_GoogleTagManager_Block_Default
+class Yireo_GoogleTagManager_Block_Ecommerce extends Yireo_GoogleTagManager_Block_Default
 {
 }

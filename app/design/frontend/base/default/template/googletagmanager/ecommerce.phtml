@@ -1,12 +1,13 @@
 <?php
 /**
- * GoogleTagManager plugin for Magento 
+ * GoogleTagManager plugin for Magento
  *
  * @package     Yireo_GoogleTagManager
  * @author      Yireo (https://www.yireo.com/)
  * @copyright   Copyright (c) 2016 Yireo (https://www.yireo.com/)
  * @license     Open Software License
  */
+
+$data = $this->getEcommerce();
 ?>
-<?php if($this->isEnabled()) : ?>
-<?php endif; ?>
+dataLayer.push({'ecommerce': <?php echo json_encode($data); ?>});

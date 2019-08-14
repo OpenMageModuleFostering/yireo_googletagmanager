@@ -1,18 +1,2 @@
 <?xml version="1.0"?>
-<package>
-    <name>yireo_googletagmanager</name>
-    <version>1.0.0</version>
-    <stability>stable</stability>
-    <license>Open Source License</license>
-    <channel>community</channel>
-    <extends/>
-    <summary>Implements Google Tag Manager into Magento</summary>
-    <description>Implements Google Tag Manager into Magento</description>
-    <notes>Implements Google Tag Manager into Magento</notes>
-    <authors><author><name>Yireo</name><user>yireo</user><email>info@yireo.com</email></author></authors>
-    <date>2012-10-02</date>
-    <time>11:11:01</time>
-    <contents><target name="mageetc"><dir name="modules"><file name="Yireo_GoogleTagManager.xml" hash="ffed7b579c7b75d0f7618d77c2c2b994"/></dir></target><target name="magecommunity"><dir name="Yireo"><dir name="GoogleTagManager"><dir name="Block"><file name="Default.php" hash="ac9e0fa686f8ab0518b67ba96d378957"/></dir><dir name="Helper"><file name="Data.php" hash="d5577fc9ab656bc97ad4a332852c06eb"/></dir><dir name="Model"><file name="Observer.php" hash="89c0ad0e22bf669a0a835e2ac7952825"/></dir><dir name="etc"><file name="config.xml" hash="4618e779a452c171b73a918656f182bc"/><file name="system.xml" hash="fd14e2cabf60a28eb70647e44b02a560"/></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="googletagmanager.xml" hash="17873ec53b53ef52529d401c125be1e2"/></dir><dir name="template"><dir name="googletagmanager"><file name="default.phtml" hash="beaf3c29e9cb4b479bdb7ca07282b837"/></dir></dir></dir></dir></dir></target></contents>
-    <compatible/>
-    <dependencies><required><php><min>5.2.8</min><max>6.0.0</max></php></required></dependencies>
-</package>
+<package><name>yireo_googletagmanager</name><version>1.1.0</version><stability>stable</stability><license>Open Source License</license><channel>community</channel><extends></extends><summary>No summary</summary><description>No description</description><notes>No notes</notes><authors><author><name>Yireo</name><user>yireo</user><email>info@yireo.com</email></author></authors><date>2014-01-16</date><time>10:28:13</time><compatible></compatible><dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies><contents><target name="mage"><dir name="app"><dir name="etc"><dir name="modules"><file name="Yireo_GoogleTagManager.xml" hash="90f31b076dbc2f5c293c1b61147743ab"/></dir></dir><dir name="code"><dir name="community"><dir name="Yireo"><dir name="GoogleTagManager"><dir name="Block"><file name="Default.php" hash="e714367b7520c63c483f9f2a01ec54e6"/><file name="Order.php" hash="fe2b3e92572278c60b4123c05bd1ddb5"/><file name="Quote.php" hash="32d1071a8d3696a755cb9c2e6d20ed9e"/></dir><dir name="etc"><file name="config.xml" hash="c87c6ae7deef1994488ba967c00d587f"/><file name="system.xml" hash="fc7295c6a7f44f3e4e7336ac5b8ee446"/></dir><dir name="Helper"><file name="Data.php" hash="3f4f9548d7235daffb0d8fa2c7eff71b"/></dir><dir name="Model"><file name="Observer.php" hash="e382a808ed44288f41964145ee683ea1"/></dir></dir></dir></dir></dir><dir name="design"><dir name="frontend"><dir name="base"><dir name="default"><dir name="template"><dir name="googletagmanager"><file name="default.phtml" hash="ae2ad18abddfd2537e6dcb812d29ce80"/><file name="order.phtml" hash="30ff5b339df44eb1940399afaada118e"/><file name="quote.phtml" hash="2d6aa496ee5ed68135a0e8f9d86b95ce"/></dir></dir><dir name="layout"><file name="googletagmanager.xml" hash="074c43895018fb372b6fda747066aa32"/></dir></dir></dir></dir></dir></dir></target></contents></package>

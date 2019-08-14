@@ -4,8 +4,8 @@
  *
  * @package     Yireo_GoogleTagManager
  * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright (c) 2012 Yireo (http://www.yireo.com/)
- * @license     Open Software License
+ * @copyright   Copyright (C) 2014 Yireo (http://www.yireo.com/)
+ * @license     Open Source License
  */
 
 class Yireo_GoogleTagManager_Model_Observer

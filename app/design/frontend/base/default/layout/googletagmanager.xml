@@ -12,5 +12,7 @@
 <layout>
     <default>
         <block type="googletagmanager/default" name="googletagmanager" template="googletagmanager/default.phtml" />
+        <block type="googletagmanager/order" name="googletagmanager_order" template="googletagmanager/order.phtml" />
+        <block type="googletagmanager/quote" name="googletagmanager_quote" template="googletagmanager/quote.phtml" />
     </default>
 </layout>

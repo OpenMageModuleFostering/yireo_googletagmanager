@@ -14,12 +14,27 @@
 class Yireo_GoogleTagManager_Block_Category extends Yireo_GoogleTagManager_Block_Default
 {
     /**
+     * @var $catalogConfig Mage_Catalog_Model_Config
+     */
+    protected $catalogConfig;
+
+    /**
+     * Constructor
+     */
+    protected function _construct()
+    {
+        $this->catalogConfig = Mage::getModel('catalog/config');
+
+        parent::_construct();
+    }
+
+    /**
      * @return Mage_Eav_Model_Entity_Collection_Abstract|null
      */
     public function getProductCollection()
     {
         /** @var Mage_Catalog_Block_Product_List $productListBlock */
-        $productListBlock = Mage::app()->getLayout()->getBlock('product_list');
+        $productListBlock = $this->layout->getBlock('product_list');
 
         if (empty($productListBlock)) {
             return null;
@@ -33,13 +48,34 @@ class Yireo_GoogleTagManager_Block_Category extends Yireo_GoogleTagManager_Block
             $collection->setCurPage($this->getCurrentPage())->setPageSize($this->getLimit());
         }
 
-        // Set default order/direction, failing to do so will prevent proper default order/direction on category views
-        // ($this->_isOrdersRendered already set in resource collection but no sorting applied)
-        if ($productListBlock->getSortBy()) {
-            $collection->setOrder($productListBlock->getSortBy(), $productListBlock->getDefaultDirection());
-        }
+        $this->applySorting($collection);
 
         return $collection;
+    }
+
+    /**
+     * @param Mage_Eav_Model_Entity_Collection_Abstract $collection
+     */
+    public function applySorting(Mage_Eav_Model_Entity_Collection_Abstract &$collection)
+    {
+        // Hebben we geen `order` in onze request, dan nemen we de standaard sortering.
+        if (!$order = strtolower(trim($this->request->getParam('order')))) {
+            $order = $this->catalogConfig->getProductListDefaultSortBy();
+        }
+
+        if ($order) {
+            $dir         = strtolower(trim($this->request->getParam('dir', 'asc')));
+            $sortingData = $this->catalogConfig->getAttributesUsedForSortBy();
+
+            if (isset($sortingData[$order]['attribute_code']) and $attributeCode = $sortingData[$order]['attribute_code']) {
+                $collection->setOrder(
+                  $attributeCode,
+                  $dir == 'asc'
+                    ? Varien_Data_Collection_Db::SORT_ORDER_ASC
+                    : Varien_Data_Collection_Db::SORT_ORDER_DESC
+                );
+            }
+        }
     }
 
     /**
@@ -58,7 +94,7 @@ class Yireo_GoogleTagManager_Block_Category extends Yireo_GoogleTagManager_Block
     protected function getLimit()
     {
         /** @var Mage_Catalog_Block_Product_List_Toolbar $productListBlockToolbar */
-        $productListBlockToolbar = Mage::app()->getLayout()->getBlock('product_list_toolbar');
+        $productListBlockToolbar = $this->layout->getBlock('product_list_toolbar');
         if (empty($productListBlockToolbar)) {
             return 9;
         }

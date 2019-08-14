@@ -145,4 +145,26 @@ class Yireo_GoogleTagManager_Block_Default extends Mage_Core_Block_Template
         $string = str_replace('"', "'", $string);
         return $string;
     }
+
+    /**
+     * @param $childScript
+     */
+    public function setChildScript($childScript)
+    {
+        $this->childScript = $childScript;
+    }
+
+    /**
+     * @return string
+     */
+    public function _toHtml()
+    {
+        // Bypass a bug that causes an empty HTML block to be skipped
+        $html = parent::_toHtml();
+        if (empty($html)) {
+            $html = ' ';
+        }
+
+        return $html;
+    }
 }

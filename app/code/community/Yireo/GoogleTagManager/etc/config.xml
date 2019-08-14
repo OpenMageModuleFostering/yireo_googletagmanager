@@ -5,14 +5,14 @@
  *
  * @package     Yireo_GoogleTagManager
  * @author      Yireo
- * @copyright   Copyright 2016 Yireo (https://www.yireo.com/)
+ * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
  * @license     Open Source License (OSL v3)
  */
 -->
 <config>
     <modules>
         <Yireo_GoogleTagManager>
-            <version>1.3.25</version>
+            <version>1.3.4</version>
         </Yireo_GoogleTagManager>
     </modules>
 
@@ -77,15 +77,4 @@
             </resources>
         </acl>
     </adminhtml>
-
-    <default>
-        <googletagmanager>
-            <settings>
-                <active>1</active>
-                <method>1</method>
-                <category_products>3</category_products>
-                <category_sorting>url</category_sorting>
-            </settings>
-        </googletagmanager>
-    </default>
 </config>

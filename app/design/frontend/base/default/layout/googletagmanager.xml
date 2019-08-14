@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GoogleTagManager extension for Magento 
+ *
+ * @package     Yireo_GoogleTagManager
+ * @author      Yireo (http://www.yireo.com/)
+ * @copyright   Copyright (c) 2012 Yireo (http://www.yireo.com/)
+ * @license     Open Source License (OSL)
+ */
+ -->
+<layout>
+    <default>
+        <block type="googletagmanager/default" name="googletagmanager" template="googletagmanager/default.phtml" />
+    </default>
+</layout>

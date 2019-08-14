@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/yireo_googletagmanager",
+    "type": "magento-module",
+    "license": "Open-Source-License",
+    "homepage": "",
+    "description": "Implements Google Tag Manager into Magento",
+    "authors": [
+    {
+        "name": "Yireo",
+        "email": "info@yireo.com"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

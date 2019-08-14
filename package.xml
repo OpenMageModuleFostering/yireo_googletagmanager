@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+    <name>yireo_googletagmanager</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license>Open Source License</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Implements Google Tag Manager into Magento</summary>
+    <description>Implements Google Tag Manager into Magento</description>
+    <notes>Implements Google Tag Manager into Magento</notes>
+    <authors><author><name>Yireo</name><user>yireo</user><email>info@yireo.com</email></author></authors>
+    <date>2012-10-02</date>
+    <time>11:11:01</time>
+    <contents><target name="mageetc"><dir name="modules"><file name="Yireo_GoogleTagManager.xml" hash="ffed7b579c7b75d0f7618d77c2c2b994"/></dir></target><target name="magecommunity"><dir name="Yireo"><dir name="GoogleTagManager"><dir name="Block"><file name="Default.php" hash="ac9e0fa686f8ab0518b67ba96d378957"/></dir><dir name="Helper"><file name="Data.php" hash="d5577fc9ab656bc97ad4a332852c06eb"/></dir><dir name="Model"><file name="Observer.php" hash="89c0ad0e22bf669a0a835e2ac7952825"/></dir><dir name="etc"><file name="config.xml" hash="4618e779a452c171b73a918656f182bc"/><file name="system.xml" hash="fd14e2cabf60a28eb70647e44b02a560"/></dir></dir></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="googletagmanager.xml" hash="17873ec53b53ef52529d401c125be1e2"/></dir><dir name="template"><dir name="googletagmanager"><file name="default.phtml" hash="beaf3c29e9cb4b479bdb7ca07282b837"/></dir></dir></dir></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.8</min><max>6.0.0</max></php></required></dependencies>
+</package>

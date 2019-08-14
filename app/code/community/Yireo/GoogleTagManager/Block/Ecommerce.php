@@ -1,6 +1,6 @@
 <?php
 /**
- * GoogleTagManager plugin for Magento 
+ * GoogleTagManager plugin for Magento
  *
  * @package     Yireo_GoogleTagManager
  * @author      Yireo (http://www.yireo.com/)
@@ -9,8 +9,8 @@
  */
 
 /**
- * Class Yireo_GoogleTagManager_Block_Custom
+ * Class Yireo_GoogleTagManager_Block_Ecommerce
  */
-class Yireo_GoogleTagManager_Block_Custom extends Yireo_GoogleTagManager_Block_Default
+class Yireo_GoogleTagManager_Block_Ecommerce extends Yireo_GoogleTagManager_Block_Default
 {
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * GoogleTagManager plugin for Magento
  *
@@ -8,21 +7,44 @@
  * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
  * @license     Open Source License (OSL v3)
  */
+
+/**
+ * Class Yireo_GoogleTagManager_Helper_Data
+ */
 class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
 {
     /**
+     * Constant for the observer method
+     */
+    const METHOD_OBSERVER = 0;
+
+    /**
+     * Constant for the layout method
+     */
+    const METHOD_LAYOUT = 1;
+
+    /**
+     * Ecommerce data
+     */
+    protected $ecommerceData = array();
+
+    /**
+     * Check whether the module is enabled
+     *
      * @return bool
      */
     public function isEnabled()
     {
-        if ((bool)Mage::getStoreConfig('advanced/modules_disable_output/Yireo_GoogleTagManager')) {
+        if ((bool) Mage::getStoreConfig('advanced/modules_disable_output/Yireo_GoogleTagManager')) {
             return false;
         }
 
-        return (bool)$this->gertConfigValue('enabled');
+        return (bool)$this->getConfigValue('active', false);
     }
 
     /**
+     * Check whether the module is in debugging mode
+     *
      * @return bool
      */
     public function isDebug()
@@ -31,22 +53,38 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Return the GA ID
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->getConfigValue('id');
+    }
+
+    /**
+     * Check whether the insertion method is the observer method
+     *
      * @return bool
      */
     public function isMethodObserver()
     {
-        return ($this->getConfigValue('method') == 0);
+        return ($this->getConfigValue('method') == self::METHOD_OBSERVER);
     }
 
     /**
+     * Check whether the insertion method is the layout method
+     *
      * @return bool
      */
     public function isMethodLayout()
     {
-        return ($this->getConfigValue('method') == 1);
+        return ($this->getConfigValue('method') == self::METHOD_LAYOUT);
     }
 
     /**
+     * Debugging method
+     *
      * @param $string
      * @param null $variable
      *
@@ -68,6 +106,8 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Return a configuration value
+     *
      * @param null $key
      * @param null $default_value
      *
@@ -76,16 +116,21 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
     public function getConfigValue($key = null, $default_value = null)
     {
         $value = Mage::getStoreConfig('googletagmanager/settings/' . $key);
-        if (empty($value)) $value = $default_value;
+        if (empty($value)) {
+            $value = $default_value;
+        }
+
         return $value;
     }
 
     /**
+     * Fetch a specific block
+     *
      * @param $name
      * @param $type
      * @param $template
      *
-     * @return bool
+     * @return bool|Mage_Core_Block_Template
      */
     public function fetchBlock($name, $type, $template)
     {
@@ -94,6 +139,7 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         if ($block = $layout->getBlock('googletagmanager_' . $name)) {
+            $block->setTemplate('googletagmanager/' . $template);
             $this->debug('Helper: Loading block from layout: '.$name);
             return $block;
         }
@@ -108,13 +154,15 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Return this header script
      *
+     * @return string
      */
     public function getHeaderScript()
     {
         $childScript = '';
 
-        // Check for the frontend layout
+        // Load the main script
         if (!($block = $this->fetchBlock('default', 'default', 'default.phtml'))) {
             return $childScript;
         }
@@ -140,6 +188,9 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
 
         // Add custom information
         $this->addCustom($childScript);
+
+        // Add enhanced ecommerce-information
+        $this->addEcommerce($childScript);
 
         $block->setChildScript($childScript);
         $html = $block->toHtml();
@@ -236,6 +287,23 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
     /**
      * @param $childScript string
      */
+    public function addEcommerce(&$childScript)
+    {
+        $ecommerce = $this->getEcommerceData();
+
+        if (!empty($ecommerce)) {
+            $ecommerceBlock = $this->fetchBlock('ecommerce', 'ecommerce', 'ecommerce.phtml');
+
+            if ($ecommerceBlock) {
+                $ecommerceBlock->setData('ecommerce', $ecommerce);
+                $childScript .= $ecommerceBlock->toHtml();
+            }
+        }
+    }
+
+    /**
+     * @param $childScript string
+     */
     public function addCustom(&$childScript)
     {
         $customBlock = $this->fetchBlock('custom', 'custom', 'custom.phtml');
@@ -243,5 +311,86 @@ class Yireo_GoogleTagManager_Helper_Data extends Mage_Core_Helper_Abstract
         if ($customBlock) {
             $childScript .= $customBlock->toHtml();
         }
+    }
+
+    /**
+     * @return array
+     */
+    protected function getEcommerceData()
+    {
+        if (empty($this->ecommerceData)) {
+            $this->ecommerceData = array(
+                'currencyCode' => $this->getCurrencyCode(),
+            );
+        }
+
+        return $this->ecommerceData;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     */
+    public function addEcommerceData($name, $value)
+    {
+        $this->ecommerceData[$name] = $value;
+    }
+
+    public function onClickProduct($product, $addJsEvent = true)
+    {
+        $block = $this->fetchBlock('custom', 'custom', 'product_click.phtml');
+
+        if ($block) {
+            $block->setProduct($product);
+            $html = $block->toHtml();
+        }
+
+        if ($addJsEvent && !empty($html)) {
+            $html = 'onclick="'.$html.'"';
+        }
+
+        return $html;
+    }
+
+    public function onAddToCart($product, $addJsEvent = true)
+    {
+        $block = $this->fetchBlock('custom', 'custom', 'product_addtocart.phtml');
+
+        if ($block) {
+            $block->setProduct($product);
+            $html = $block->toHtml();
+        }
+
+        if ($addJsEvent && !empty($html)) {
+            $html = 'onclick="'.$html.'"';
+        }
+
+        return $html;
+    }
+
+    public function onRemoveFromCart($product, $addJsEvent = true)
+    {
+        $block = $this->fetchBlock('custom', 'custom', 'product_removefromcart.phtml');
+
+        if ($block) {
+            $block->setProduct($product);
+            $html = $block->toHtml();
+        }
+
+        if ($addJsEvent && !empty($html)) {
+            $html = 'onclick="'.$html.'"';
+        }
+
+        return $html;
+    }
+
+    /**
+     * Return the current currency code
+     *
+     * @return string
+     */
+    public function getCurrencyCode()
+    {
+        return Mage::app()->getStore()->getCurrentCurrencyCode();
     }
 }

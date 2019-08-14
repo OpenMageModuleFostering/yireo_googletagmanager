@@ -3,8 +3,8 @@
  * GoogleTagManager plugin for Magento 
  *
  * @package     Yireo_GoogleTagManager
- * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
+ * @author      Yireo (https://www.yireo.com/)
+ * @copyright   Copyright 2016 Yireo (https://www.yireo.com/)
  * @license     Open Source License (OSL v3)
  */
 
@@ -29,10 +29,13 @@ class Yireo_GoogleTagManager_Block_Quote extends Yireo_GoogleTagManager_Block_De
         $data = array();
         foreach($quote->getAllItems() as $item) {
             /** @var Mage_Sales_Model_Quote_Item $item */
+
+            $product = $item->getProduct();
+
             $data[] = array(
-                'sku' => $item->getProduct()->getSku(),
-                'name' => $item->getProduct()->getName(),
-                'price' => $item->getProduct()->getPrice(),
+                'sku' => $product->getSku(),
+                'name' => $product->getName(),
+                'price' => Mage::helper('tax')->getPrice($product, $product->getFinalPrice()),
                 'quantity' => $item->getQty(),
             );
         }

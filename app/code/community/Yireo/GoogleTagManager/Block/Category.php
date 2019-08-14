@@ -3,8 +3,8 @@
  * GoogleTagManager plugin for Magento 
  *
  * @package     Yireo_GoogleTagManager
- * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
+ * @author      Yireo (https://www.yireo.com/)
+ * @copyright   Copyright 2016 Yireo (https://www.yireo.com/)
  * @license     Open Source License (OSL v3)
  */
 
@@ -27,7 +27,17 @@ class Yireo_GoogleTagManager_Block_Category extends Yireo_GoogleTagManager_Block
 
         // Fetch the current collection from the block and set pagination
         $collection = $productListBlock->getLoadedProductCollection();
-        $collection->setCurPage($this->getCurrentPage())->setPageSize($this->getLimit());
+        
+        // Set Limit Except for 'all' products
+        if ($this->getLimit() != 'all') {
+            $collection->setCurPage($this->getCurrentPage())->setPageSize($this->getLimit());
+        }
+
+        // Set default order/direction, failing to do so will prevent proper default order/direction on category views
+        // ($this->_isOrdersRendered already set in resource collection but no sorting applied)
+        if ($productListBlock->getSortBy()) {
+            $collection->setOrder($productListBlock->getSortBy(), $productListBlock->getDefaultDirection());
+        }
 
         return $collection;
     }

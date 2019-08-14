@@ -7,14 +7,14 @@
  * @package     Yireo_GoogleTagManager
  * @author      Yireo
  * @copyright   Copyright (C) 2014 Yireo (http://www.yireo.com/)
- * @license     Open Software License
+ * @license     Open Source License (OSL v3)
  */
 -->
 <config>
     <sections>
         <googletagmanager translate="label" module="googletagmanager">
             <label>Google Tag Manager</label>
-            <tab>service</tab>
+            <tab>yireo</tab>
             <frontend_type>text</frontend_type>
             <sort_order>342</sort_order>
             <show_in_default>1</show_in_default>

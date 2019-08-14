@@ -6,13 +6,13 @@
  * @package     Yireo_GoogleTagManager
  * @author      Yireo
  * @copyright   Copyright (C) 2014 Yireo (http://www.yireo.com/)
- * @license     Open Software License
+ * @license     Open Source License (OSL v3)
  */
 -->
 <config>
     <modules>
         <Yireo_GoogleTagManager>
-            <version>1.1.1</version>
+            <version>1.2.0</version>
         </Yireo_GoogleTagManager>
     </modules>
 

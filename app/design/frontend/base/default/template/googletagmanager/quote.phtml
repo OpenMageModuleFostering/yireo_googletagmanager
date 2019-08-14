@@ -11,7 +11,7 @@
 <?php if($this->isEnabled()) : ?>
 <script>
 <?php $quote = $this->getQuote(); ?>
-<?php if($quote->getId() > 0) : ?>
+<?php if(!empty($quote) && $quote->getId() > 0) : ?>
 dataLayer = [{
     'transactionId': '<?php echo $quote->getId(); ?>',
     'transactionAffiliation': '<?php echo Mage::app()->getWebsite()->getName(); ?>',

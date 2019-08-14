@@ -11,7 +11,7 @@
 <?php if($this->isEnabled()) : ?>
 <script>
 <?php $order = $this->getOrder(); ?>
-<?php if($order->getId() > 0) : ?>
+<?php if(!empty($order) && $order->getId() > 0) : ?>
 dataLayer = [{
     'transactionId': '<?php echo $order->getIncrementId(); ?>',
     'transactionAffiliation': '<?php echo Mage::app()->getWebsite()->getName(); ?>',

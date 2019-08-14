@@ -19,8 +19,12 @@ if ($this->isEnabled()) {
         $this->addAttribute('productSku', $product->getSku());
         $this->addAttribute('productPrice', $product->getPrice());
 
-        $categoryName = $product->getCategory()->getName();
-        $this->getModuleHelper()->addEcommerceData('actionField', array('list' => $categoryName));
+        $category = $product->getCategory();
+        $categoryName = (is_object($category)) ? $category->getName() : null;
+
+        if (!empty($categoryName)) {
+            $this->getModuleHelper()->addEcommerceData('actionField', array('list' => $categoryName));
+        }
 
         $productData = array(
             'name' => $product->getName(),

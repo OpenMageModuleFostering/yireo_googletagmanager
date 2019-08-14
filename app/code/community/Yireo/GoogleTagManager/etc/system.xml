@@ -11,6 +11,12 @@
  */
 -->
 <config>
+    <tabs>
+        <yireo translate="label" module="googletagmanager">
+            <label>Yireo</label>
+            <sort_order>900</sort_order>
+        </yireo>
+    </tabs>
     <sections>
         <googletagmanager translate="label" module="googletagmanager">
             <label>Google Tag Manager</label>

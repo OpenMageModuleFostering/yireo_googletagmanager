@@ -9,24 +9,24 @@
  */
 
 /**
- * Class Yireo_GoogleTagManager_Block_Search
+ * Class Yireo_GoogleTagManager_Block_Tag
  */
-class Yireo_GoogleTagManager_Block_Search extends Yireo_GoogleTagManager_Block_Category
+class Yireo_GoogleTagManager_Block_Tag extends Yireo_GoogleTagManager_Block_Category
 {
     /**
      * @return Mage_Eav_Model_Entity_Collection_Abstract|null
      */
     public function getProductCollection()
     {
-        /** @var Mage_Catalog_Block_Product_List $searchListBlock */
-        $searchListBlock = $this->layout->getBlock('search_result_list');
+        /** @var Mage_Catalog_Block_Product_List $taggedProductsBlock */
+        $taggedProductsBlock = $this->layout->getBlock('search_result_list');
 
-        if (empty($searchListBlock)) {
+        if (empty($taggedProductsBlock)) {
             return null;
         }
 
         // Fetch the current collection from the block and set pagination and order
-        $collection = $searchListBlock->getLoadedProductCollection();
+        $collection = $taggedProductsBlock->getLoadedProductCollection();
 
         // Set Limit Except for 'all' products
         if ($this->getLimit() != 'all') {

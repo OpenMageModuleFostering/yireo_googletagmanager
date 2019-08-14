@@ -4,7 +4,7 @@
  *
  * @package     Yireo_GoogleTagManager
  * @author      Yireo (http://www.yireo.com/)
- * @copyright   Copyright (C) 2014 Yireo (http://www.yireo.com/)
+ * @copyright   Copyright 2015 Yireo (http://www.yireo.com/)
  * @license     Open Source License (OSL v3)
  */
 
@@ -40,9 +40,9 @@ class Yireo_GoogleTagManager_Block_Default extends Mage_Core_Block_Template
         return json_encode($attributes);
     }
 
-    public function setAttribute($name, $value)
+    public function addAttribute($name, $value)
     {
-        Mage::getSingleton('googletagmanager/container')->setData($name, $value);
+        return Mage::getSingleton('googletagmanager/container')->setData($name, $value);
     }
 
     public function getAttributes()

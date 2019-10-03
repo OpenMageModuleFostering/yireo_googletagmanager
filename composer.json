@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/yireo_googletagmanager",
+    "name": "OpenMageModuleFostering\/yireo_googletagmanager",
     "type": "magento-module",
     "license": "Open-Source-License",
     "homepage": "",
     "description": "No summary",
     "authors": [
-    {
-        "name": "Yireo",
-        "email": "info@yireo.com"
-    }
-],
+        {
+            "name": "Yireo",
+            "email": "info@yireo.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
